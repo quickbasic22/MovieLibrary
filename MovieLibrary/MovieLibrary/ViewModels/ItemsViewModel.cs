@@ -1,6 +1,7 @@
 ﻿using MovieLibrary.Models;
 using MovieLibrary.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -11,13 +12,14 @@ namespace MovieLibrary.ViewModels
     public class ItemsViewModel : BaseViewModel
     {
         private Movie _selectedItem;
-
+        private List<Movie> List;
         public ObservableCollection<Movie> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Movie> ItemTapped { get; }
+        public Command<string> DeleteCommand { get; set; }
 
-        public ItemsViewModel()
+        public ItemsViewModel(List<Movie> list)
         {
             Title = "Browse";
             Items = new ObservableCollection<Movie>();
@@ -26,11 +28,23 @@ namespace MovieLibrary.ViewModels
             ItemTapped = new Command<Movie>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
-
-            
+            DeleteCommand = new Command<string>(OnDelete);
+            List = list;
         }
 
-        
+        private async void OnDelete(string strId)
+        {
+            foreach (var item in List)
+            {
+                await DataStore.DeleteItemAsync(item.Id);
+                Items.Remove(item);
+            }
+            
+            ExecuteLoadItemsCommand();
+
+
+        }
+
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
