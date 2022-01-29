@@ -17,18 +17,22 @@ namespace MovieLibrary.ViewModels
 
         public IDataStore<Movie> DataStore => DependencyService.Get<IDataStore<Movie>>();
 
+        private int id = 0;
         private string title = string.Empty;
         private DateTime released = DateTime.Now;
         private string mediaformat = string.Empty;
         private bool isbusy = false;
-
         public bool IsBusy
         {
             get { return isbusy; }
             set { SetProperty(ref isbusy, value); }
         }
 
-        
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
         public string Title
         {
             get { return title; }

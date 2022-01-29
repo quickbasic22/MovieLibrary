@@ -4,7 +4,7 @@ namespace MovieLibrary.Models
 {
     public class Movie
     {
-        public string Id
+        public int Id
         {
             get;
             set;

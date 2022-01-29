@@ -1,17 +1,21 @@
 ﻿using MovieLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MovieLibrary.ViewModels
 {
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class NewItemViewModel : BaseViewModel
     {
+        private int id;
         private string title;
         private DateTime released;
         private string mediaformat;
+        private int itemId;
 
         public NewItemViewModel()
         {
@@ -24,9 +28,13 @@ namespace MovieLibrary.ViewModels
         private bool ValidateSave()
         {
             return !String.IsNullOrWhiteSpace(title)
-                && !String.IsNullOrWhiteSpace(mediaformat);
+                && !String.IsNullOrWhiteSpace(mediaformat) && (id > 0) && (released != null);
         }
-
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
         public string Title
         {
             get => title;
@@ -49,6 +57,19 @@ namespace MovieLibrary.ViewModels
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
 
+        public int ItemId
+        {
+            get
+            {
+                return itemId;
+            }
+            set
+            {
+                itemId = value;
+                LoadItemId(value);
+            }
+        }
+
         private async void OnCancel()
         {
             // This will pop the current page off the navigation stack
@@ -57,9 +78,10 @@ namespace MovieLibrary.ViewModels
 
         private async void OnSave()
         {
+            
             Movie newItem = new Movie()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = Id,
                 Title = Title,
                 Released = Released,
                 Mediaformat = Mediaformat
@@ -71,6 +93,22 @@ namespace MovieLibrary.ViewModels
             await Shell.Current.GoToAsync("..");
         }
 
-        
+       public async void LoadItemId(int itemId)
+        {
+            Movie item = new Movie();
+            try
+            {
+                Id = itemId;
+                Title = "MovieTitle";
+                Released = DateTime.Now;
+                Mediaformat = "DVD";
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Load Item");
+            }
+        }
+
+
     }
 }

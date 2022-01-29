@@ -28,18 +28,7 @@ namespace MovieLibrary.Views
             _viewModel.OnAppearing();
         }
 
-        private void CheckBoxSelected_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-
-          
-        }
-
-        private void ItemsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-                       
-
-        }
-
+        
         private void SwipeItemDelete_Invoked(object sender, EventArgs e)
         {
 

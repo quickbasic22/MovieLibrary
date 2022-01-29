@@ -73,9 +73,20 @@ namespace MovieLibrary.ViewModels
             }
         }
 
-        private async void OnAddItem(object obj)
+        private async void OnAddItem()
         {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
+            var items = await DataStore.GetItemsAsync(true);
+            int lastId = 0;
+            foreach (var item in items)
+            {
+                lastId = item.Id;
+            }
+            if (lastId < 1)
+            {
+                lastId = 1;
+            }
+            lastId += 1;
+            await Shell.Current.GoToAsync($"{nameof(NewItemPage)}?{nameof(NewItemViewModel.ItemId)}={lastId}");
         }
 
         async void OnItemSelected(Movie item)
