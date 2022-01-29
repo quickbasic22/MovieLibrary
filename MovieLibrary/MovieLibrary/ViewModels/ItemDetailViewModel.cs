@@ -1,8 +1,5 @@
-﻿using MovieLibrary.Models;
-using MovieLibrary.Services;
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MovieLibrary.ViewModels
@@ -11,6 +8,7 @@ namespace MovieLibrary.ViewModels
     public class ItemDetailViewModel : BaseViewModel
     {
         private string itemId;
+        private string id;
         private string title;
         private DateTime released;
         private string mediaformat;
@@ -20,7 +18,11 @@ namespace MovieLibrary.ViewModels
         }
 
         
-        public string Id { get; set; }
+        public string Id 
+        { 
+            get => id;
+            set => SetProperty(ref id, value);
+        }
 
         public string Title
         {

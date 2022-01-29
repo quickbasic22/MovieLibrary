@@ -1,8 +1,5 @@
 ﻿using MovieLibrary.Services;
-using MovieLibrary.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MovieLibrary
 {
@@ -11,10 +8,11 @@ namespace MovieLibrary
 
         public App()
         {
-            InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+           
+                InitializeComponent();
+                DependencyService.Register<MockDataStore>();
+                MainPage = new AppShell();
+            
         }
 
         protected override void OnStart()

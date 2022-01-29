@@ -14,13 +14,13 @@ namespace MovieLibrary.Services
         {
             items = new List<Movie>()
             {
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Pain and Gain", Released=DateTime.Now.AddYears(-7).AddMonths(-3), Mediaformat = "DVD", MovieIsSelected = false },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Jurassic Park", Released=DateTime.Now.AddYears(-12).AddMonths(-11), Mediaformat = "Blueray", MovieIsSelected = false },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Days of Thunder",Released=DateTime.Now.AddYears(-22).AddMonths(7), Mediaformat = "IMAX", MovieIsSelected = false },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Survive The Night",Released=DateTime.Now.AddYears(-2).AddMonths(8), Mediaformat = "UHD", MovieIsSelected = false },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "CopShop",Released=DateTime.Parse("1/17/2022"), Mediaformat = "Hd", MovieIsSelected = false },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "The Protege", Released=DateTime.Parse("1-15-2022"), Mediaformat = "Blueray", MovieIsSelected = false},
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Fortress", Released=DateTime.Parse("1-12-2022"), Mediaformat = "DVD", MovieIsSelected = false }
+                new Movie { Id = Guid.NewGuid().ToString(), Title = "Pain and Gain", Released=DateTime.Now.AddYears(-7).AddMonths(-3), Mediaformat = "DVD" },
+                new Movie { Id = Guid.NewGuid().ToString(), Title = "Jurassic Park", Released=DateTime.Now.AddYears(-12).AddMonths(-11), Mediaformat = "Blueray" },
+                new Movie { Id = Guid.NewGuid().ToString(), Title = "Days of Thunder",Released=DateTime.Now.AddYears(-22).AddMonths(7), Mediaformat = "IMAX" },
+                new Movie { Id = Guid.NewGuid().ToString(), Title = "Survive The Night",Released=DateTime.Now.AddYears(-2).AddMonths(8), Mediaformat = "UHD" },
+                new Movie { Id = Guid.NewGuid().ToString(), Title = "CopShop",Released=DateTime.Parse("1/17/2022"), Mediaformat = "Hd" },
+                new Movie { Id = Guid.NewGuid().ToString(), Title = "The Protege", Released=DateTime.Parse("1-15-2022"), Mediaformat = "Blueray"},
+                new Movie { Id = Guid.NewGuid().ToString(), Title = "Fortress", Released=DateTime.Parse("1-12-2022"), Mediaformat = "DVD" }
             };
         }
 

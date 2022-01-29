@@ -4,9 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using Xamarin.Forms;
-using MovieLibrary.ViewModels;
 
 namespace MovieLibrary.ViewModels
 {
@@ -19,17 +17,18 @@ namespace MovieLibrary.ViewModels
 
         public IDataStore<Movie> DataStore => DependencyService.Get<IDataStore<Movie>>();
 
-        
-        bool isBusy = false;
+        private string title = string.Empty;
+        private DateTime released = DateTime.Now;
+        private string mediaformat = string.Empty;
+        private bool isbusy = false;
+
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            get { return isbusy; }
+            set { SetProperty(ref isbusy, value); }
         }
 
-        string title = string.Empty;
-        DateTime released = DateTime.Now;
-        readonly string mediaformat = string.Empty;
+        
         public string Title
         {
             get { return title; }
@@ -45,9 +44,10 @@ namespace MovieLibrary.ViewModels
         public string Mediaformat
         {
             get { return mediaformat; }
-            set { SetProperty(ref title, value); }
+            set { SetProperty(ref mediaformat, value); }
         }
 
+       
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",
             Action onChanged = null)

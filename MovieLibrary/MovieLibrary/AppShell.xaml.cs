@@ -1,7 +1,4 @@
-﻿using MovieLibrary.ViewModels;
-using MovieLibrary.Views;
-using System;
-using System.Collections.Generic;
+﻿using MovieLibrary.Views;
 using Xamarin.Forms;
 
 namespace MovieLibrary

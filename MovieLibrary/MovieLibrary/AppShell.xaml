@@ -13,6 +13,7 @@
 
     <Shell.Resources>
         <ResourceDictionary>
+            <x:String x:Key="IconImage">&#xf83f;</x:String>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />

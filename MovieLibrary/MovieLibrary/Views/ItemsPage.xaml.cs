@@ -1,6 +1,8 @@
 ﻿using MovieLibrary.Models;
 using MovieLibrary.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace MovieLibrary.Views
@@ -9,14 +11,14 @@ namespace MovieLibrary.Views
     {
         readonly ItemsViewModel _viewModel;
 
-        public List<Movie> movieSelectionList;
-       
+              
 
         public ItemsPage()
         {
-            InitializeComponent();
+                InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel(movieSelectionList);
+                BindingContext = _viewModel = new ItemsViewModel();
+                       
         }
                      
         
@@ -34,12 +36,17 @@ namespace MovieLibrary.Views
 
         private void ItemsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var moviecurrent = e.CurrentSelection as Movie;
-            
-            if (moviecurrent.MovieIsSelected)
-                movieSelectionList.Add(moviecurrent);
-            else
-                movieSelectionList.Remove(moviecurrent);
+                       
+
+        }
+
+        private void SwipeItemDelete_Invoked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SwipeItemDetails_Invoked(object sender, EventArgs e)
+        {
 
         }
     }

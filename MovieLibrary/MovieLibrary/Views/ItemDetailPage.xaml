@@ -8,6 +8,8 @@
     
 
     <StackLayout Spacing="20" Padding="15">
+        <Label Text="Id:" FontSize="Medium" />
+        <Label Text="{Binding Id}" FontSize="Large"/>
         <Label Text="Title:" FontSize="Medium" />
         <Label Text="{Binding Title}" FontSize="Large"/>
         <Label Text="Released:" FontSize="Medium" />
