@@ -14,13 +14,13 @@ namespace MovieLibrary.Services
         {
             items = new List<Movie>()
             {
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Pain and Gain", Released=DateTime.Now.AddYears(-7).AddMonths(-3), Mediaformat = "DVD" },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Jurassic Park", Released=DateTime.Now.AddYears(-12).AddMonths(-11), Mediaformat = "Blueray" },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Days of Thunder",Released=DateTime.Now.AddYears(-22).AddMonths(7), Mediaformat = "IMAX" },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Survive The Night",Released=DateTime.Now.AddYears(-2).AddMonths(8), Mediaformat = "UHD" },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "CopShop",Released=DateTime.Parse("1/17/2022"), Mediaformat = "Hd" },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "The Protege", Released=DateTime.Parse("1-15-2022"), Mediaformat = "Blueray" },
-                new Movie { Id = Guid.NewGuid().ToString(), Title = "Fortress", Released=DateTime.Parse("1-12-2022"), Mediaformat = "DVD" }
+                new Movie { Id = 0, Title = "Pain and Gain", Released=DateTime.Now.AddYears(-7).AddMonths(-3), Mediaformat = "DVD" },
+                new Movie { Id = 1, Title = "Jurassic Park", Released=DateTime.Now.AddYears(-12).AddMonths(-11), Mediaformat = "Blueray" },
+                new Movie { Id = 2, Title = "Days of Thunder",Released=DateTime.Now.AddYears(-22).AddMonths(7), Mediaformat = "IMAX" },
+                new Movie { Id = 3, Title = "Survive The Night",Released=DateTime.Now.AddYears(-2).AddMonths(8), Mediaformat = "UHD" },
+                new Movie { Id = 4, Title = "CopShop",Released=DateTime.Parse("1/17/2022"), Mediaformat = "Hd" },
+                new Movie { Id = 5, Title = "The Protege", Released=DateTime.Parse("1-15-2022"), Mediaformat = "Blueray" },
+                new Movie { Id = 6, Title = "Fortress", Released=DateTime.Parse("1-12-2022"), Mediaformat = "DVD" }
             };
         }
 
@@ -40,7 +40,7 @@ namespace MovieLibrary.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
             var oldItem = items.Where((Movie arg) => arg.Id == id).FirstOrDefault();
             items.Remove(oldItem);
@@ -48,7 +48,7 @@ namespace MovieLibrary.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Movie> GetItemAsync(string id)
+        public async Task<Movie> GetItemAsync(int id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }

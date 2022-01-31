@@ -4,7 +4,11 @@
              xmlns:viewmodels="clr-namespace:MovieLibrary.ViewModels" x:DataType="viewmodels:ItemDetailViewModel"
              x:Class="MovieLibrary.Views.ItemDetailPage"
              Title="{Binding Title}">
-
+    <ContentPage.BindingContext>
+        <viewmodels:ItemsViewModel>
+            
+        </viewmodels:ItemsViewModel>
+    </ContentPage.BindingContext>
     
 
     <StackLayout Spacing="20" Padding="15">
@@ -14,6 +18,9 @@
         <Label Text="{Binding Released}" FontSize="Large"/>
         <Label Text="Mediaformat:" FontSize="Medium" />
         <Label Text="{Binding Mediaformat}" FontSize="Large"/>
+        <StackLayout>
+            <Button x:Name="btnDelete" Text="Delete Movie" Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference btnDelete}}" />
+        </StackLayout>
     </StackLayout>
     
 </ContentPage>

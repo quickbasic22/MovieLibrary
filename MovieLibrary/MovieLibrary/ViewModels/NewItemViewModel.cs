@@ -9,6 +9,7 @@ namespace MovieLibrary.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
+        private int id;
         private string title;
         private DateTime released;
         private string mediaformat;
@@ -25,6 +26,12 @@ namespace MovieLibrary.ViewModels
         {
             return !String.IsNullOrWhiteSpace(title)
                 && !String.IsNullOrWhiteSpace(mediaformat);
+        }
+
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
         }
 
         public string Title
@@ -59,7 +66,7 @@ namespace MovieLibrary.ViewModels
         {
             Movie newItem = new Movie()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = 1,
                 Title = Title,
                 Released = Released,
                 Mediaformat = Mediaformat

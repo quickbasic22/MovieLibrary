@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace MovieLibrary.ViewModels
@@ -16,6 +17,7 @@ namespace MovieLibrary.ViewModels
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Movie> ItemTapped { get; }
+        public ICommand DeleteMovie { get; set; }
 
         public ItemsViewModel()
         {
@@ -26,11 +28,19 @@ namespace MovieLibrary.ViewModels
             ItemTapped = new Command<Movie>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
-
+            DeleteMovie = new Command(OnDelete);
             
         }
 
-        
+        private void OnDelete(object obj)
+        {
+            var movie = obj as Movie;
+            DataStore.DeleteItemAsync(movie.Id);
+            Items.RemoveAt(movie.Id);
+            ExecuteLoadItemsCommand();
+
+        }
+
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;

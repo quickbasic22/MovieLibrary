@@ -10,7 +10,8 @@ namespace MovieLibrary.ViewModels
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel
     {
-        private string itemId;
+        private int itemId;
+        private int id;
         private string title;
         private DateTime released;
         private string mediaformat;
@@ -19,8 +20,12 @@ namespace MovieLibrary.ViewModels
         {
         }
 
-        
-        public string Id { get; set; }
+
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
 
         public string Title
         {
@@ -40,7 +45,7 @@ namespace MovieLibrary.ViewModels
             set => SetProperty(ref mediaformat, value);
         }
 
-        public string ItemId
+        public int ItemId
         {
             get
             {
@@ -53,7 +58,7 @@ namespace MovieLibrary.ViewModels
             }
         }
 
-        public async void LoadItemId(string itemId)
+        public async void LoadItemId(int itemId)
         {
             try
             {

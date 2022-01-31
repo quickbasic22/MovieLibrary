@@ -27,9 +27,17 @@ namespace MovieLibrary.ViewModels
             set { SetProperty(ref isBusy, value); }
         }
 
+        int id = 0;
         string title = string.Empty;
         DateTime released = DateTime.Now;
         readonly string mediaformat = string.Empty;
+
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
         public string Title
         {
             get { return title; }
