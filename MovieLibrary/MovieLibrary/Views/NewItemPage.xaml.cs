@@ -10,8 +10,6 @@ namespace MovieLibrary.Views
 {
     public partial class NewItemPage : ContentPage
     {
-        public Movie Item { get; set; }
-
         public NewItemPage()
         {
             InitializeComponent();

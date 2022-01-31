@@ -11,37 +11,34 @@ namespace MovieLibrary.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private Movie _selectedItem;
-
-        public ObservableCollection<Movie> Items { get; }
+        public ObservableCollection<Movie> Items;
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Movie> ItemTapped { get; }
-        public ICommand DeleteMovie { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
             Items = new ObservableCollection<Movie>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
             ItemTapped = new Command<Movie>(OnItemSelected);
-
             AddItemCommand = new Command(OnAddItem);
-            DeleteMovie = new Command(OnDelete);
-            
+            DeleteCommand = new Command(OnDelete);
         }
 
-        private void OnDelete(object obj)
+        private async void OnDelete(object obj)
         {
             var movie = obj as Movie;
-            DataStore.DeleteItemAsync(movie.Id);
+            await DataStore.DeleteItemAsync(movie.Id);
             Items.RemoveAt(movie.Id);
-            ExecuteLoadItemsCommand();
+            await ExecuteLoadItemsCommand();
+            await Shell.Current.GoToAsync($"{nameof(ItemsPage)}");
+            Console.WriteLine(String.Format($"item deleted = {0} with id {1}", movie.Title, movie.Id));
 
         }
 
-        async Task ExecuteLoadItemsCommand()
+        public async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
@@ -67,19 +64,8 @@ namespace MovieLibrary.ViewModels
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
         }
-
-        public Movie SelectedItem
-        {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
-            }
-        }
-
+                
         private async void OnAddItem(object obj)
         {
             await Shell.Current.GoToAsync(nameof(NewItemPage));

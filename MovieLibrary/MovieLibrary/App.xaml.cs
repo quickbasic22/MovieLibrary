@@ -1,20 +1,23 @@
-﻿using MovieLibrary.Services;
-using MovieLibrary.Views;
-using System;
+﻿using MovieLibrary.Models;
+using MovieLibrary.Services;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MovieLibrary
 {
     public partial class App : Application
     {
+        public IDataStore<Movie> DataStore;
+        
 
         public App()
         {
             InitializeComponent();
-
             DependencyService.Register<MockDataStore>();
+            DataStore = DependencyService.Get<IDataStore<Movie>>();          
+            this.Properties.Add("DataStore", DataStore);  
             MainPage = new AppShell();
+            
         }
 
         protected override void OnStart()

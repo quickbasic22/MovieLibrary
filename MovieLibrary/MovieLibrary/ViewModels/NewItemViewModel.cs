@@ -9,11 +9,7 @@ namespace MovieLibrary.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
-        private int id;
-        private string title;
-        private DateTime released;
-        private string mediaformat;
-
+       
         public NewItemViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
@@ -24,34 +20,8 @@ namespace MovieLibrary.ViewModels
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(title)
-                && !String.IsNullOrWhiteSpace(mediaformat);
+            return true;
         }
-
-        public int Id
-        {
-            get => id;
-            set => SetProperty(ref id, value);
-        }
-
-        public string Title
-        {
-            get => title;
-            set => SetProperty(ref title, value);
-        }
-
-        public DateTime Released
-        {
-            get => released;
-            set => SetProperty(ref released, value);
-        }
-
-        public string Mediaformat
-        {
-            get => mediaformat;
-            set => SetProperty(ref mediaformat, value);
-        }
-
 
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
@@ -66,7 +36,6 @@ namespace MovieLibrary.ViewModels
         {
             Movie newItem = new Movie()
             {
-                Id = 1,
                 Title = Title,
                 Released = Released,
                 Mediaformat = Mediaformat

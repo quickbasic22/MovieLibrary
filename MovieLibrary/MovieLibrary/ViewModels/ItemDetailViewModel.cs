@@ -11,40 +11,12 @@ namespace MovieLibrary.ViewModels
     public class ItemDetailViewModel : BaseViewModel
     {
         private int itemId;
-        private int id;
-        private string title;
-        private DateTime released;
-        private string mediaformat;
-
+        
         public ItemDetailViewModel()
         {
+           
         }
-
-
-        public int Id
-        {
-            get => id;
-            set => SetProperty(ref id, value);
-        }
-
-        public string Title
-        {
-            get => title;
-            set => SetProperty(ref title, value);
-        }
-
-        public DateTime Released
-        {
-            get => released;
-            set => SetProperty(ref released, value);
-        }
-
-        public string Mediaformat
-        {
-            get => mediaformat;
-            set => SetProperty(ref mediaformat, value);
-        }
-
+       
         public int ItemId
         {
             get
@@ -63,7 +35,6 @@ namespace MovieLibrary.ViewModels
             try
             {
                 var item = await DataStore.GetItemAsync(itemId);
-                Id = item.Id;
                 Title = item.Title;
                 Released = item.Released;
                 Mediaformat = item.Mediaformat;

@@ -1,15 +1,5 @@
-﻿using MovieLibrary.Models;
-using MovieLibrary.Services;
-using MovieLibrary.ViewModels;
-using MovieLibrary.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MovieLibrary.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MovieLibrary.Views
 {
@@ -21,6 +11,7 @@ namespace MovieLibrary.Views
             InitializeComponent();
 
             BindingContext = _viewModel = new ItemsViewModel();
+            ItemsListView.ItemsSource = _viewModel.Items;
            
         }
   

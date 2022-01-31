@@ -11,9 +11,9 @@
             <Label Text="Title" FontSize="Medium" />
             <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Released" FontSize="Medium" />
-            <Editor Text="{Binding Released, Mode=TwoWay}" FontSize="Medium" Margin="0" />
+            <DatePicker Date="{Binding Released, Mode=TwoWay}" FontSize="Medium" Margin="0" />
             <Label Text="Mediaformat" FontSize="Medium" />
-            <Editor Text="{Binding Mediaformat, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <Editor Text="{Binding Mediaformat, Mode=TwoWay}" FontSize="Medium" />
             <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
