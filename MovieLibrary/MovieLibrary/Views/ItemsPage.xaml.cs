@@ -10,7 +10,7 @@ namespace MovieLibrary.Views
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = (ItemsViewModel)App.Current.Properties["ItemsModel"];
             ItemsListView.ItemsSource = _viewModel.Items;
            
         }

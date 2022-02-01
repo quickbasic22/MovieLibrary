@@ -9,6 +9,7 @@ namespace MovieLibrary.Views
         { 
             InitializeComponent();
             BindingContext = new ItemDetailViewModel();
+            btnDelete.BindingContext = (ItemsViewModel)App.Current.Properties["ItemsModel"];
         }
     }
 }

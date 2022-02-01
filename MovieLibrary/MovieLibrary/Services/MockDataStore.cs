@@ -3,16 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace MovieLibrary.Services
 {
     public class MockDataStore : IDataStore<Movie>
     {
-        readonly List<Movie> items;
+        ObservableCollection<Movie> items;
 
         public MockDataStore()
         {
-            items = new List<Movie>()
+            items = new ObservableCollection<Movie>
             {
                 new Movie { Title = "Pain and Gain", Released=DateTime.Now.AddYears(-7).AddMonths(-3), Mediaformat = "DVD" },
                 new Movie { Title = "Jurassic Park", Released=DateTime.Now.AddYears(-12).AddMonths(-11), Mediaformat = "Blueray" },

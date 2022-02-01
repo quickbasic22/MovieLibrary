@@ -11,20 +11,19 @@ namespace MovieLibrary.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Movie> Items;
+        
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Movie> ItemTapped { get; }
-        public ICommand DeleteCommand { get; set; }
+        public Command<Movie> DeleteCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Movie>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<Movie>(OnItemSelected);
             AddItemCommand = new Command(OnAddItem);
-            DeleteCommand = new Command(OnDelete);
+            DeleteCommand = new Command<Movie>(OnDelete);
         }
 
         private async void OnDelete(object obj)

@@ -11,11 +11,11 @@ namespace MovieLibrary.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Movie> DataStore;
-
+        public ObservableCollection<Movie> Items;
         public BaseViewModel()
         {
             DataStore = (IDataStore<Movie>)App.Current.Properties["DataStore"];
-
+            Items = (ObservableCollection<Movie>)App.Current.Properties["ObserveMovies"];
         }
 
         bool isBusy = false;
