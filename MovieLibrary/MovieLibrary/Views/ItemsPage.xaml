@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:local="clr-namespace:MovieLibrary.ViewModels"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieLibrary.Views.ItemsPage"
              Title="{Binding Title}"
-             xmlns:local="clr-namespace:MovieLibrary.ViewModels"  
-             xmlns:model="clr-namespace:MovieLibrary.Models" x:DataType="local:ItemsViewModel"
+            
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
@@ -20,7 +20,7 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Movie">
+                    <StackLayout Padding="10">
                         <Label Text="{Binding Id}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 

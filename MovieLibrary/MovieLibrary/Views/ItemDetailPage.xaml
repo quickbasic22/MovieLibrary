@@ -1,26 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:MovieLibrary.ViewModels" x:DataType="viewmodels:ItemDetailViewModel"
-             x:Class="MovieLibrary.Views.ItemDetailPage"
-             Title="{Binding Title}">
-    <ContentPage.BindingContext>
-        <viewmodels:ItemsViewModel>
-            
-        </viewmodels:ItemsViewModel>
-    </ContentPage.BindingContext>
-    
-
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Title:" FontSize="Medium" />
-        <Label Text="{Binding Title}" FontSize="Large"/>
-        <Label Text="Released:" FontSize="Medium" />
-        <Label Text="{Binding Released}" FontSize="Large"/>
-        <Label Text="Mediaformat:" FontSize="Medium" />
-        <Label Text="{Binding Mediaformat}" FontSize="Large"/>
-        <StackLayout>
-            <Button x:Name="btnDelete" Text="Delete Movie" Command="{Binding DeleteMovie}" CommandParameter="{Binding Id}" />
+             x:Class="MovieLibrary.Views.ItemDetailPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Id:" FontSize="Medium" />
+            <Label Text="{Binding Id}" FontSize="Large"/>
+            <Label Text="Title:" FontSize="Medium" />
+            <Label Text="{Binding Title}" FontSize="Large"/>
+            <Label Text="Released:" FontSize="Medium" />
+            <DatePicker Date="{Binding Released, StringFormat'{0:d}'}" FontSize="Large"/>
+            <Label Text="Mediaformat:" FontSize="Medium" />
+            <Label Text="{Binding Mediaformat}" FontSize="Large"/>
+            <StackLayout>
+                <Button x:Name="btnDelete" Text="Delete Movie" Command="{Binding DeleteMovie}" />
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
-    
+    </ContentPage.Content>
 </ContentPage>

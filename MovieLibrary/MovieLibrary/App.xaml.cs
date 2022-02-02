@@ -10,7 +10,6 @@ namespace MovieLibrary
 {
     public partial class App : Application
     {
-        public ObservableCollection<Movie> Items { get; }
         public IDataStore<Movie> DataStore;
         public App()
         {
@@ -18,21 +17,22 @@ namespace MovieLibrary
             DependencyService.Register<MockDataStore>();
             DataStore = DependencyService.Get<IDataStore<Movie>>();
             this.Properties.Add("StoreData", DataStore);
-            Items = new ObservableCollection<Movie>();
-            this.Properties.Add("OBC", Items);
             MainPage = new AppShell();
         }
 
         protected override void OnStart()
         {
+            Console.WriteLine("OnStart Fired");
         }
 
         protected override void OnSleep()
         {
+            Console.WriteLine("OnSleep Fired");
         }
 
         protected override void OnResume()
         {
+            Console.WriteLine("OnResume Fired");
         }
     }
 }
