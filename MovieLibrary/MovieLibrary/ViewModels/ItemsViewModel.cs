@@ -15,7 +15,7 @@ namespace MovieLibrary.ViewModels
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Movie> ItemTapped { get; }
-        public Command<Movie> DeleteCommand { get; set; }
+       
 
         public ItemsViewModel()
         {
@@ -23,20 +23,9 @@ namespace MovieLibrary.ViewModels
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<Movie>(OnItemSelected);
             AddItemCommand = new Command(OnAddItem);
-            DeleteCommand = new Command<Movie>(OnDelete);
+            
         }
-
-        private async void OnDelete(object obj)
-        {
-            var movie = obj as Movie;
-            await DataStore.DeleteItemAsync(movie.Id);
-            Items.RemoveAt(movie.Id);
-            await ExecuteLoadItemsCommand();
-            await Shell.Current.GoToAsync($"{nameof(ItemsPage)}");
-            Console.WriteLine(String.Format($"item deleted = {0} with id {1}", movie.Title, movie.Id));
-
-        }
-
+                
         public async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;

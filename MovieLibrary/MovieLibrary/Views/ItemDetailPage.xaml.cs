@@ -5,11 +5,11 @@ namespace MovieLibrary.Views
 {
     public partial class ItemDetailPage : ContentPage
     {
+        private ItemDetailViewModel _ItemDetails;
         public ItemDetailPage()
         { 
             InitializeComponent();
-            BindingContext = new ItemDetailViewModel();
-            btnDelete.BindingContext = (ItemsViewModel)App.Current.Properties["ItemsModel"];
+            BindingContext = _ItemDetails = new ItemDetailViewModel();
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using MovieLibrary.Models;
+using System;
 using Xamarin.Forms;
 
 namespace MovieLibrary.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
-       
+        
         public NewItemViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
@@ -13,6 +14,8 @@ namespace MovieLibrary.ViewModels
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
+
+        
 
         private bool ValidateSave()
         {
@@ -30,6 +33,7 @@ namespace MovieLibrary.ViewModels
 
         private async void OnSave()
         {
+
             Movie newItem = new Movie()
             {
                 Title = Title,
