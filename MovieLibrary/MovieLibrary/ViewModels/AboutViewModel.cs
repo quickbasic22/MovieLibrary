@@ -13,6 +13,7 @@ namespace MovieLibrary.ViewModels
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
         }
 
+        public string Title { get; } = "Xamarin Forms";
         public ICommand OpenWebCommand { get; }
     }
 }

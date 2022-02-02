@@ -19,7 +19,7 @@
         <Label Text="Mediaformat:" FontSize="Medium" />
         <Label Text="{Binding Mediaformat}" FontSize="Large"/>
         <StackLayout>
-            <Button x:Name="btnDelete" Text="Delete Movie" Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference btnDelete}}" />
+            <Button x:Name="btnDelete" Text="Delete Movie" Command="{Binding DeleteMovie}" CommandParameter="{Binding Id}" />
         </StackLayout>
     </StackLayout>
     

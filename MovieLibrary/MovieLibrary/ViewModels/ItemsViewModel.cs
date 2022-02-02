@@ -1,4 +1,5 @@
 ﻿using MovieLibrary.Models;
+using MovieLibrary.Services;
 using MovieLibrary.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -12,34 +13,59 @@ namespace MovieLibrary.ViewModels
     public class ItemsViewModel : BaseViewModel
     {
         private Movie _selectedItem;
-
         public ObservableCollection<Movie> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Movie> ItemTapped { get; }
-        public ICommand DeleteMovie { get; set; }
+        public IDataStore<Movie> DataStore;
+        int id = 0;
+        string title = string.Empty;
+        DateTime released = DateTime.Now;
+        string mediaformat = string.Empty;
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Movie>();
+            Items = (ObservableCollection<Movie>)App.Current.Properties["OBC"];
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
             ItemTapped = new Command<Movie>(OnItemSelected);
-
             AddItemCommand = new Command(OnAddItem);
-            DeleteMovie = new Command(OnDelete);
+            DataStore = (IDataStore<Movie>)App.Current.Properties["StoreData"];
             
         }
 
-        private void OnDelete(object obj)
+        bool isBusy = false;
+        public bool IsBusy
         {
-            var movie = obj as Movie;
-            DataStore.DeleteItemAsync(movie.Id);
-            Items.RemoveAt(movie.Id);
-            ExecuteLoadItemsCommand();
-
+            get { return isBusy; }
+            set { SetProperty(ref isBusy, value); }
         }
+
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
+
+        public string Title
+        {
+            get => title;
+            set => SetProperty(ref title, value);
+        }
+
+        public DateTime Released
+        {
+            get => released;
+            set => SetProperty(ref released, value);
+        }
+
+        public string Mediaformat
+        {
+            get => mediaformat;
+            set => SetProperty(ref mediaformat, value);
+        }
+
+
 
         async Task ExecuteLoadItemsCommand()
         {

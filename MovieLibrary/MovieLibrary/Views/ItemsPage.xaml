@@ -4,7 +4,7 @@
              x:Class="MovieLibrary.Views.ItemsPage"
              Title="{Binding Title}"
              xmlns:local="clr-namespace:MovieLibrary.ViewModels"  
-             xmlns:model="clr-namespace:MovieLibrary.Models"  
+             xmlns:model="clr-namespace:MovieLibrary.Models" x:DataType="local:ItemsViewModel"
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>

@@ -1,4 +1,5 @@
 ﻿using MovieLibrary.Models;
+using MovieLibrary.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,22 +14,25 @@ namespace MovieLibrary.ViewModels
         private string title;
         private DateTime released;
         private string mediaformat;
+        public IDataStore<Movie> DataStore;
 
         public NewItemViewModel()
         {
+            DataStore = (IDataStore<Movie>)App.Current.Properties["StoreData"];
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
-                (_, __) => SaveCommand.ChangeCanExecute();
+               (_, __) => SaveCommand.ChangeCanExecute();
         }
 
-        private bool ValidateSave()
+        bool isBusy = false;
+        public bool IsBusy
         {
-            return !String.IsNullOrWhiteSpace(title)
-                && !String.IsNullOrWhiteSpace(mediaformat);
+            get => isBusy;
+            set => SetProperty(ref isBusy, value);
         }
 
-        public int Id
+        public int Id 
         {
             get => id;
             set => SetProperty(ref id, value);
@@ -52,6 +56,13 @@ namespace MovieLibrary.ViewModels
             set => SetProperty(ref mediaformat, value);
         }
 
+        private bool ValidateSave()
+        {
+            return !String.IsNullOrWhiteSpace(title)
+                && !String.IsNullOrWhiteSpace(mediaformat);
+        }
+
+        
 
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
@@ -66,7 +77,7 @@ namespace MovieLibrary.ViewModels
         {
             Movie newItem = new Movie()
             {
-                Id = 1,
+                Id = Id,
                 Title = Title,
                 Released = Released,
                 Mediaformat = Mediaformat
