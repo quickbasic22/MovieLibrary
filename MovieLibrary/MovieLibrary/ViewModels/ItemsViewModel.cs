@@ -11,22 +11,37 @@ namespace MovieLibrary.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        
+        private Movie _selectedItem;
+
+        public ObservableCollection<Movie> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Movie> ItemTapped { get; }
-       
+        public ICommand DeleteMovie { get; set; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
+            Items = new ObservableCollection<Movie>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+
             ItemTapped = new Command<Movie>(OnItemSelected);
+
             AddItemCommand = new Command(OnAddItem);
+            DeleteMovie = new Command(OnDelete);
             
         }
-                
-        public async Task ExecuteLoadItemsCommand()
+
+        private void OnDelete(object obj)
+        {
+            var movie = obj as Movie;
+            DataStore.DeleteItemAsync(movie.Id);
+            Items.RemoveAt(movie.Id);
+            ExecuteLoadItemsCommand();
+
+        }
+
+        async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
@@ -52,8 +67,19 @@ namespace MovieLibrary.ViewModels
         public void OnAppearing()
         {
             IsBusy = true;
+            SelectedItem = null;
         }
-                
+
+        public Movie SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                SetProperty(ref _selectedItem, value);
+                OnItemSelected(value);
+            }
+        }
+
         private async void OnAddItem(object obj)
         {
             await Shell.Current.GoToAsync(nameof(NewItemPage));

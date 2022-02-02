@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieLibrary.Views.ItemsPage"
              Title="{Binding Title}"
-             xmlns:local="clr-namespace:MovieLibrary.ViewModels"
+             xmlns:local="clr-namespace:MovieLibrary.ViewModels"  
              xmlns:model="clr-namespace:MovieLibrary.Models"  
              x:Name="BrowseItemsPage">
 
@@ -16,7 +16,8 @@
     -->
     <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="ItemsListView"
-                SelectionMode="Single">
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="model:Movie">
@@ -28,7 +29,7 @@
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                        <Label Text="{Binding Released, StringFormat='d'}" 
+                        <Label Text="{Binding Released}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />

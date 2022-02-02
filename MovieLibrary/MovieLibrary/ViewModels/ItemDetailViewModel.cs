@@ -1,5 +1,5 @@
 ﻿using MovieLibrary.Models;
-using MovieLibrary.Views;
+using MovieLibrary.Services;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -11,53 +11,38 @@ namespace MovieLibrary.ViewModels
     public class ItemDetailViewModel : BaseViewModel
     {
         private int itemId;
-        public Command<Movie> DeleteCommand { get; set; }
-        public Command LoadItemsCommand { get; }
-
+        private int id;
+        private string title;
+        private DateTime released;
+        private string mediaformat;
 
         public ItemDetailViewModel()
         {
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            DeleteCommand = new Command<Movie>(OnDelete);
         }
 
-        public async Task ExecuteLoadItemsCommand()
-        {
-            IsBusy = true;
 
-            try
-            {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
-                {
-                    Items.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
         }
 
-        public void OnAppearing()
+        public string Title
         {
-            IsBusy = true;
+            get => title;
+            set => SetProperty(ref title, value);
         }
 
-        private async void OnDelete(object obj)
+        public DateTime Released
         {
-            var movie = obj as Movie;
-            await DataStore.DeleteItemAsync(movie.Id);
-            Items.RemoveAt(movie.Id);
-            await ExecuteLoadItemsCommand();
-            await Shell.Current.GoToAsync($"{nameof(ItemsPage)}");
-            Console.WriteLine(String.Format($"item deleted = {0} with id {1}", movie.Title, movie.Id));
+            get => released;
+            set => SetProperty(ref released, value);
+        }
 
+        public string Mediaformat
+        {
+            get => mediaformat;
+            set => SetProperty(ref mediaformat, value);
         }
 
         public int ItemId
@@ -78,6 +63,7 @@ namespace MovieLibrary.ViewModels
             try
             {
                 var item = await DataStore.GetItemAsync(itemId);
+                Id = item.Id;
                 Title = item.Title;
                 Released = item.Released;
                 Mediaformat = item.Mediaformat;

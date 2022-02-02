@@ -2,22 +2,24 @@
 using MovieLibrary.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Xamarin.Forms;
+using MovieLibrary.ViewModels;
 
 namespace MovieLibrary.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Movie> DataStore;
-        public ObservableCollection<Movie> Items;
         public BaseViewModel()
         {
-            DataStore = (IDataStore<Movie>)App.Current.Properties["DataStore"];
-            Items = (ObservableCollection<Movie>)App.Current.Properties["ObserveMovies"];
+            
         }
 
+        public IDataStore<Movie> DataStore => DependencyService.Get<IDataStore<Movie>>();
+
+        
         bool isBusy = false;
         public bool IsBusy
         {
@@ -25,11 +27,17 @@ namespace MovieLibrary.ViewModels
             set { SetProperty(ref isBusy, value); }
         }
 
+        int id = 0;
         string title = string.Empty;
         DateTime released = DateTime.Now;
         readonly string mediaformat = string.Empty;
 
-       
+        public int Id
+        {
+            get { return id; }
+            set { SetProperty(ref id, value); }
+        }
+
         public string Title
         {
             get { return title; }
